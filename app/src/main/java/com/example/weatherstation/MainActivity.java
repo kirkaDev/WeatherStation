@@ -53,22 +53,20 @@ public class MainActivity extends AppCompatActivity {
         recievedFromServerTextView = findViewById(R.id.recievedText);
         txtView_cityName = findViewById(R.id.txtView_cityName);
 
-        // "Узнать погоду"
+        // "Show the weather"
         pullMsgToServerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void  onClick(View v) {
 
                 pojo = null;
-
-                infoServer = new InfoFromServer();
+                getLocation();
+                infoServer = new InfoFromServer(location);
 
                 try {
                     pojo = infoServer.WeatherAtNow();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-
                 txtView_cityName.setText(pojo.getCityName());
                 recievedFromServerTextView.setText(getString(R.string.msgTempOverboard) + pojo.getTemp()+ "\n");
             }
@@ -78,11 +76,8 @@ public class MainActivity extends AppCompatActivity {
         btnGetLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 getLocation();
-
-                editTextLatitude.setText(String.valueOf(location.getLatitude()));
-                editTextLongitude.setText(String.valueOf(location.getLongitude()));
+                showLocation();
             }
         });
     }
@@ -96,8 +91,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
-
-
+        getLocation();
     }
 
         LocationListener locationListener = new LocationListener() {
@@ -111,8 +105,6 @@ public class MainActivity extends AppCompatActivity {
             double longitude = loc.getLongitude();
 
             location.SetLocation(latitude, longitude);
-            editTextLatitude.setText(String.valueOf(location.getLatitude()));
-            editTextLongitude.setText(String.valueOf(location.getLongitude()));
         }
 
         @Override
@@ -142,8 +134,13 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3000, 1, locationListener);
+        locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 1, locationListener);
     }
 
+    private void showLocation()
+    {
+        editTextLatitude.setText(String.valueOf(location.getLatitude()));
+        editTextLongitude.setText(String.valueOf(location.getLongitude()));
+    }
 
 }

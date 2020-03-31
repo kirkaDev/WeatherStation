@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Weather station</string>
-    <string name="API_KEY">ХХХ</string>
+    <string name="API_KEY">1a75353c54ed4ae7a4a948fccc0b82ef</string>
     <string name="you_are_locate_in">Вы находитесь:</string>
     <string name="label_longitude">longitude</string>
     <string name="main_activity_title">Расскажу о погоде, недорого!</string>
     <string name="label_weather">Погода:</string>
     <string name="label_latitude">latitude</string>
-    <string name="button_get_weather">Узнать погоду!</string>
+    <string name="button_show_weather">Show the weather!</string>
     <string name="msgTempOverboard">Температура за бортом: "</string>
     <string name="here_will_be_longitude">Here will be longitude</string>
 </resources>

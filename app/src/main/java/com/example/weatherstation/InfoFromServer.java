@@ -2,6 +2,7 @@ package com.example.weatherstation;
 
 import android.util.Log;
 
+import java.util.Objects;
 import java.util.concurrent.Executors;
 
 import retrofit2.Call;
@@ -14,9 +15,24 @@ public class InfoFromServer {
 
     private POJO_Weather pojo_Weather;
 
-    boolean threadFinished = false;
+    private String API_Key = "1a75353c54ed4ae7a4a948fccc0b82ef";
+    private String latitude;
+    private String longitude;
+    private String requestToServer;
 
-    InfoFromServer(){
+    private ILocation location;
+
+    private boolean threadFinished = false;
+
+    InfoFromServer(ILocation location)
+    {
+        this.location = location;
+        pojo_Weather = new POJO_Weather();
+
+    }
+
+    InfoFromServer()
+    {
         pojo_Weather = new POJO_Weather();
     }
 
@@ -24,14 +40,17 @@ public class InfoFromServer {
 
         // do something
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.weatherbit.io/v2.0/")
+                .baseUrl("https://api.weatherbit.io/")
                 .callbackExecutor(Executors.newSingleThreadExecutor())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        IRESTful restful = retrofit.create(IRESTful.class);
+        APIService restful = retrofit.create(APIService.class);
 
-        Call<Parameters> call = restful.GetWeatherByLocation();
+        double lat = location.getLatitude();
+        double lon = location.getLongitude();
+
+        Call<Parameters> call = restful.GetWeatherByLocation(lat, lon, API_Key);
 
         call.enqueue(new Callback<Parameters>() {
             @Override
@@ -44,6 +63,7 @@ public class InfoFromServer {
 
                 Parameters resp = response.body();
 
+                assert resp != null;
                 pojo_Weather = resp.data.get(0);
 
                 threadFinished = true;
@@ -51,7 +71,7 @@ public class InfoFromServer {
 
             @Override
             public void onFailure(Call<Parameters> call, Throwable t) {
-                Log.e("InfoFromServer.class", t.getMessage());
+                Log.e("InfoFromServer.class", Objects.requireNonNull(t.getMessage()));
             }
         });
 

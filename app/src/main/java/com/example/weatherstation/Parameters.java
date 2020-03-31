@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+// Helper class for creating POJOs
 public class Parameters {
 
     @SerializedName("data")

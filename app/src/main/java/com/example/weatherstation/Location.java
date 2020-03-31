@@ -2,10 +2,8 @@ package com.example.weatherstation;
 
 public class Location {
 
-    // Долгота
     private double longitude;
 
-    // Широта
     private double latitude;
 
     public void setLongitude(double longitude) {
