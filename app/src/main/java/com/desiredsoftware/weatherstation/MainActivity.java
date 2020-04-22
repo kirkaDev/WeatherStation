@@ -1,4 +1,4 @@
-package com.example.weatherstation;
+package com.desiredsoftware.weatherstation;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -14,6 +14,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.desiredsoftware.weatherstation.location.CoarseLocation;
+import com.desiredsoftware.weatherstation.location.ILocation;
+import com.desiredsoftware.weatherstation.weatherapi.IWeatherApi;
+import com.desiredsoftware.weatherstation.weatherapi.IWeatherApiWeatherbit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,13 +67,20 @@ public class MainActivity extends AppCompatActivity {
                 getLocation();
                 infoServer = new InfoFromServer(location);
 
+
+                SettingsForWeatherRequest settings = new SettingsForWeatherRequest.Builder().
+                        withLocationType(new CoarseLocation()).
+                        withWeatherApi(IWeatherApi.class).build();
+
                 try {
                     pojo = infoServer.WeatherAtNow();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 txtView_cityName.setText(pojo.getCityName());
                 recievedFromServerTextView.setText(getString(R.string.msgTempOverboard) + pojo.getTemp()+ "\n");
+
             }
         });
 

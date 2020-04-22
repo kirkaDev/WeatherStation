@@ -10,7 +10,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.weatherstation"
+        applicationId "com.desiredsoftware.weatherstation"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1

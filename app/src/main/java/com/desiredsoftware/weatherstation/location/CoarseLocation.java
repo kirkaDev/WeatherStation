@@ -1,4 +1,4 @@
-package com.example.weatherstation;
+package com.desiredsoftware.weatherstation.location;
 
 public class CoarseLocation extends Location implements ILocation {
 

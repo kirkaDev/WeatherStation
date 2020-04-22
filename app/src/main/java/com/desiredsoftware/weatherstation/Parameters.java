@@ -1,4 +1,4 @@
-package com.example.weatherstation;
+package com.desiredsoftware.weatherstation;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

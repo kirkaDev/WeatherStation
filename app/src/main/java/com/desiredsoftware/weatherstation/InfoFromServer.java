@@ -1,6 +1,9 @@
-package com.example.weatherstation;
+package com.desiredsoftware.weatherstation;
 
 import android.util.Log;
+
+import com.desiredsoftware.weatherstation.location.ILocation;
+import com.desiredsoftware.weatherstation.weatherapi.IWeatherApiWeatherbit;
 
 import java.util.Objects;
 import java.util.concurrent.Executors;
@@ -10,6 +13,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.internal.EverythingIsNonNull;
 
 public class InfoFromServer {
 
@@ -45,7 +49,7 @@ public class InfoFromServer {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        APIService restful = retrofit.create(APIService.class);
+        IWeatherApiWeatherbit restful = retrofit.create(IWeatherApiWeatherbit.class);
 
         double lat = location.getLatitude();
         double lon = location.getLongitude();
@@ -54,6 +58,7 @@ public class InfoFromServer {
 
         call.enqueue(new Callback<Parameters>() {
             @Override
+            @EverythingIsNonNull
             public void onResponse(Call<Parameters> call, Response<Parameters> response) {
 
                 if(!response.isSuccessful()) {
@@ -70,6 +75,7 @@ public class InfoFromServer {
             }
 
             @Override
+            @EverythingIsNonNull
             public void onFailure(Call<Parameters> call, Throwable t) {
                 Log.e("InfoFromServer.class", Objects.requireNonNull(t.getMessage()));
             }
