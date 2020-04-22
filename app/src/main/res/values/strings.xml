@@ -9,4 +9,7 @@
     <string name="button_show_weather">Show the weather!</string>
     <string name="msgTempOverboard">Температура за бортом: "</string>
     <string name="here_will_be_longitude">Here will be longitude</string>
+    <string name="weather_description">Weather description</string>
+    <string name="city_name">City name</string>
+    <string name="temp_at_now">Temp at now</string>
 </resources>
