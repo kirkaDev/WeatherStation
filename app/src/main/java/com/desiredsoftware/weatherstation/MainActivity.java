@@ -50,13 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
         location = new CoarseLocation();
 
-        editTextLatitude = findViewById(R.id.editTextLatitude);
-        editTextLongitude = findViewById(R.id.editTextLongitude);
 
-        pullMsgToServerBtn = findViewById(R.id.button_get_weather);
-        btnGetLocation = findViewById(R.id.btnGetLocation);
-        recievedFromServerTextView = findViewById(R.id.recievedText);
-        txtView_cityName = findViewById(R.id.txtView_cityName);
+        recievedFromServerTextView = findViewById(R.id.textView_degreesAtNow);
+        txtView_cityName = findViewById(R.id.textView_cityName);
 
         // "Show the weather"
         pullMsgToServerBtn.setOnClickListener(new View.OnClickListener() {
